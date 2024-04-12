@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    a {
+      font-size: 28px;
+      text-decoration: underline;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    let links = [];
+    let numLinks = 1000; // Adjust the number of hyperlinks here
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      textAlign(CENTER, CENTER);
+
+      createHyperlinks();
+    }
+
+    function draw() {
+      background(000);
+
+      for (let link of links) {
+        let r = random(255);
+        let g = random(255);
+        let b = random(255);
+        link.style('color', `rgb(${r}, ${g}, ${b})`);
+      }
+    }
+
+    function createHyperlinks() {
+      for (let i = 0; i < numLinks; i++) {
+        let x = random(width);
+        let y = random(height);
+        let text = generateRandomText(6);
+        let link = createA('#', text);
+        link.position(x, y);
+        links.push(link);
+      }
+    }
+
+    function generateRandomText(length) {
+      let result = '';
+      let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return result;
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
+</body>
+</html>
